@@ -1,0 +1,28 @@
+class Solution:
+    def combinationSum(self, nums: List[int], target: int) -> List[List[int]]:
+        
+        sol = []
+        res = []
+
+        def backtrack(i, summ):
+
+            if summ > target:
+                return
+
+            if summ == target:
+                res.append(sol[:])
+                return
+
+            if i >= len(nums):
+                return
+
+            #kepp choosing
+            sol.append(nums[i])
+            backtrack(i,  summ + nums[i])
+            sol.pop()
+
+            #skip
+            backtrack(i+1, summ)
+    
+        backtrack(0,0)
+        return res
